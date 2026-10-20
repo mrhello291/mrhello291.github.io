@@ -115,44 +115,6 @@ PORTFOLIO.entries = [
     ] },
 
   /* ── Competitions ─────────────────────────────────────── */
-  { id:'inter-iit-15', category:'competitions', status:'ongoing',
-    title:'Inter IIT Tech Meet 15.0', org:'All IITs', unit:'Annual inter-IIT technical championship', result:'In preparation',
-    summary:'Preparing with IIT Mandi’s contingent for the next inter-IIT technical meet.',
-    tags:['IIT Mandi contingent'], date:'2026',
-    skillIds:[], toolIds:[],
-    details:{
-      'Event':'Inter IIT Tech Meet 15.0.',
-      'Status':'In preparation. More notes once the problem statements are out.'
-    }, links:[] },
-  { id:'gitlab-life-after-code', category:'competitions', status:'ongoing',
-    title:'Life After Code', org:'GitLab', unit:'Devpost hackathon · The path to production', result:'In progress', logo:'assets/logos/gitlab.svg',
-    summary:'GitLab’s Devpost hackathon on the path to production at the speed of imagination: what happens to software after the code is written.',
-    tags:['Devpost','GitLab'], date:'Oct 2026',
-    skillIds:[], toolIds:[],
-    details:{
-      'Event':'Life After Code, a GitLab hackathon on Devpost running 5–27 October 2026, with a $45,000 prize pool.',
-      'Status':'Building now. More once the submission is in.'
-    }, links:[{ label:'Hackathon', url:'https://gitlab-transcend.devpost.com/' }] },
-  { id:'gemma-4-developer-agent', category:'competitions', status:'ongoing',
-    title:'Gemma 4 Developer Agent', org:'Google · Kaggle', unit:'Kaggle competition · Coding agents on everyday hardware', result:'In progress', logo:'assets/logos/kaggle.svg', partnerLogo:{ src:'assets/logos/google.svg', alt:'Google' },
-    summary:'A Kaggle competition from Google to train the open Gemma 4 model into a capable coding agent that runs on everyday hardware.',
-    tags:['Kaggle','Gemma 4','Coding agents'], date:'2026',
-    skillIds:['agents','alignment'], toolIds:[],
-    details:{
-      'Event':'The Gemma 4 Developer Agent competition on Kaggle, run with Google, with a $100,000 prize pool and an entry deadline of 25 November 2026.',
-      'The challenge':'Further train an open Gemma 4 model into a coding agent that is useful on ordinary developer hardware.',
-      'Status':'In progress.'
-    }, links:[] },
-  { id:'name-that-llm', category:'competitions', status:'ongoing',
-    title:'Name That LLM', org:'Kaggle', unit:'Kaggle competition · Model attribution', result:'In progress', logo:'assets/logos/kaggle.svg',
-    summary:'Identify which of 18 large language models wrote each unlabelled passage of text.',
-    tags:['Kaggle','NLP','Model attribution'], date:'2026 — 2027',
-    skillIds:['nlp'], toolIds:[],
-    details:{
-      'Event':'Name That LLM on Kaggle, with a $50,000 prize pool and an entry deadline of 6 January 2027.',
-      'The challenge':'Attribute each passage to one of 18 models from Anthropic, Google, Moonshot AI, OpenAI, Qwen and Z.ai. Telling models apart from short text helps researchers audit open benchmarks.',
-      'Status':'In progress.'
-    }, links:[{ label:'Competition', url:'https://www.kaggle.com/competitions/name-that-llm' }] },
   { id:'aihack-2026', category:'competitions', status:'past',
     title:'AiHack India 2026', org:'AIFUL Corporation', unit:'Held at IIT Mandi · Credit-risk modelling', result:'4th prize · Best Model', medal:'steel', logo:'assets/logos/aiful.png',
     summary:'Predicting which borrowers will default by month 24 from AIFUL’s anonymised lending data. Team KamandNet finished 4th on the final private leaderboard in the Best Model category.',
