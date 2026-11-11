@@ -9,7 +9,7 @@ window.PORTFOLIO = {
     degree: 'B.Tech · Computer Science & Engineering', college: 'IIT Mandi', location: 'Himachal Pradesh, India', age: 'Final year · Class of 2027',
     about: [
       'It started in 2020 with tiny Python games and a reminder script. At IIT Mandi that habit grew into line-following robots, a quadruped built on a student budget, and a lot of hackathons.',
-      'Somewhere along the way I fell for the hard part of AI: not the demo, but making it dependable. That runs through my work, from multi-agent root-cause analysis at Microsoft to research on hallucination, synthetic data and deepfake detection, and side projects like VectorLedger and ACOS.',
+      'Somewhere along the way I fell for the hard part of AI: not the demo, but making it dependable. That runs through my work, from multi-agent root-cause analysis at Microsoft to research on hallucination, synthetic data and deepfake detection, and side projects like VectorLedger and RaiseRadar.',
       'I like problems where careful evaluation matters more than a clever trick, and I compete because it shows me quickly what actually works.'
     ],
     email: 'hoda.asif123@gmail.com',
@@ -22,13 +22,13 @@ window.PORTFOLIO = {
       { label: 'LeetCode', url: 'https://leetcode.com/u/mrhello291/' }
     ],
     highlights: [
-      { title: 'SWE Intern · Microsoft', subtitle: 'Azure Storage · agentic root-cause analysis', category: 'jobs', entry: 'microsoft-azure-storage',
+      { title: 'SWE Intern · Microsoft', subtitle: 'Azure Storage', category: 'jobs', entry: 'microsoft-azure-storage',
         logos: [{ src: 'assets/logos/microsoft.svg', alt: 'Microsoft' }] },
       { title: 'Fetch.ai Agentic AI Hackathon · 1st prize', subtitle: 'FrostHack 2025 at IIT Mandi · Fetch.ai Innovation Lab', category: 'competitions', entry: 'frosthack-2025',
         logos: [{ src: 'assets/logos/fetchai.png', alt: 'Fetch.ai' }] },
-      { title: 'AiHack India 2026 · 4th prize, Best Model', subtitle: 'Organised by AIFUL at IIT Mandi', category: 'competitions', entry: 'aihack-2026',
+      { title: 'AiHack India 2026 · Best Model prize', subtitle: 'Organised by AIFUL at IIT Mandi', category: 'competitions', entry: 'aihack-2026',
         logos: [{ src: 'assets/logos/aiful.png', alt: 'AIFUL' }] },
-      { title: 'Inter IIT Tech Meet 14.0 · 6th of 23 IITs', subtitle: 'Observe.AI NLP challenge · IIT Patna', category: 'competitions', entry: 'inter-iit-14',
+      { title: 'Inter IIT Tech Meet 14.0', subtitle: 'Observe.AI NLP challenge · IIT Patna', category: 'competitions', entry: 'inter-iit-14',
         logos: [{ src: 'assets/logos/interiit14.png', alt: 'Inter IIT Tech Meet 14.0' }, { src: 'assets/logos/observeai.svg', alt: 'Observe.AI' }] }
     ],
     journey: [
@@ -285,17 +285,17 @@ PORTFOLIO.entries = [
       'How it works':'Immutable document identity with monotonic versions, idempotent deletion and ACL propagation, immediate or reversible scheduled deletion with quarantine, metadata discovery of artifacts that were never registered, and periodic anti-entropy reconciliation behind a tenant-scoped API and CLI.',
       'Next step':'A connector conformance kit, retry and backoff policy, Azure AI Search and Elasticsearch connectors, and KMS-backed signing.'
     }, links:[{ label:'Repository', url:'https://github.com/mrhello291/VectorLedger' }] },
-  { id:'acos', category:'side-quests', status:'ongoing',
-    title:'ACOS: an AI-native Linux userspace',
-    summary:'Apps ask for capabilities like Cognitive.Language.Reason; ACOS picks a model, manages its memory, and returns a normalised result.',
-    tags:['Linux','AI infrastructure'], date:'Aug 2026 – present',
-    skillIds:['linux-ipc','agents','rag'], toolIds:['python','ollama'],
+  { id:'raiseradar', category:'side-quests', status:'past',
+    title:'RaiseRadar',
+    summary:'Finds startups that just raised a Series B or C, checks whether they are hiring, and lists every open role in one filterable page.',
+    tags:['Job hunting','LLM extraction','Self-updating'], date:'Oct – Nov 2026',
+    skillIds:['data-pipelines','nlp','databases','dashboards','containers'], toolIds:['python','docker'],
     details:{
-      'The annoyance':'Every app that wants AI bundles its own model, its own runtime and its own memory budget.',
-      'The solution':'Make cognition a machine-wide Linux facility: a daemon that routes capability requests to registered local or remote models.',
-      'How it works':'A versioned shared-memory ABI with async request/response rings over memfd, mmap, eventfd and Unix sockets; lease-based model lifecycle with RAM/VRAM admission and idle eviction; UID/GID-based policy via SO_PEERCRED; namespaced vector memory; mock, Ollama and OpenAI-compatible connectors; systemd packaging.',
-      'Next step':'Grow the working userspace foundation into a real distribution.'
-    }, links:[] },
+      'The annoyance':'Freshly funded startups are the ones about to hire, but finding them means reading funding news and then hunting down each company’s careers page by hand.',
+      'The solution':'A scheduled pipeline that reads funding headlines from Google News and RSS feeds, uses a free LLM on OpenRouter to pull out the company, round, amount and investors, then finds each company’s job board and collects every role with its required experience, level, work mode, location, pay and full description.',
+      'What you get':'A searchable HTML report with filters for round, region, work mode, level and experience, a hiring-history line showing which companies are ramping up, and a tracker for the roles you applied to.',
+      'How it runs':'Locally, as a Docker container that refreshes itself, or as a fork that rebuilds on GitHub Pages twice a day through GitHub Actions.'
+    }, links:[{ label:'Code', url:'https://github.com/mrhello291/RaiseRadar' }] },
   { id:'next-cf-problem', category:'side-quests', status:'past',
     title:'Next CF Problem',
     summary:'Picking the next Codeforces problem shouldn’t take longer than solving it. Recommends recent unsolved problems near your rating, tags hidden.',
@@ -318,25 +318,19 @@ PORTFOLIO.entries = [
       'The annoyance':'Repetitive searching, sorting and filtering on shopping sites.',
       'How it works':'Each step captures a reduced DOM, asks Gemini 2.5 Pro for the next one to four Playwright actions, filters unsafe patterns, and loops until done or a step limit. A small web UI shows the action history.'
     }, links:[{ label:'Code', url:'https://github.com/mrhello291/amazon_automator' }] },
-  { id:'ppt-contradictions', category:'side-quests', status:'past',
-    title:'PowerPoint Contradiction Detector',
-    summary:'Finds conflicting numbers, claims and timelines across the slides of a deck, using text and slide images.',
-    tags:['Multimodal LLM'], date:'Aug 2025',
-    skillIds:['llm-eval'], toolIds:['python','gemini'],
-    details:{
-      'The annoyance':'Decks that say 20% growth on slide 3 and 15% on slide 9.',
-      'How it works':'Extracts text, tables and metadata, sends slide images to Gemini 2.0 Flash, and reports numerical, textual, timeline and logical inconsistencies by severity as console, JSON or Markdown.'
-    }, links:[{ label:'Code', url:'https://github.com/mrhello291/pptContradictionDetector' }] },
   /* ── Open source ──────────────────────────────────────── */
-  { id:'genai-synthetic-data-contribs', category:'open-source', status:'past',
-    title:'ORD synthetic data generator',
-    summary:'Thirteen merged pull requests: latent-space restructuring, a vectorised ordinal loss, Optuna tuning and evaluation scripts.',
-    tags:['Contributor','13 merged PRs'], date:'Apr 2026',
-    skillIds:['generative'], toolIds:['python','pytorch','optuna'],
+  { id:'tilo-os', category:'open-source', status:'ongoing',
+    title:'tilo',
+    summary:'Finding my way around tilo, an open-source AI-native Linux OS, to land a first contribution.',
+    tags:['AI-native OS','Exploring'], date:'Nov 2026 – present',
+    skillIds:[], toolIds:[],
     details:{
-      'Repository':'pihu26112005/GenAI-Synthetic-Data-Generator, the shared codebase behind our tabular generation research.',
-      'What changed':'Integrated latent-space restructuring, vectorised the ordinal loss, made the distance matrix algebraically safe, added Optuna parameter search and evaluations, plus bug fixes.'
-    }, links:[{ label:'Repository', url:'https://github.com/pihu26112005/GenAI-Synthetic-Data-Generator' }] },
+      'The project':'tilo is an open-source, AI-native Linux operating system where AI agents and people share one computer. Every app publishes typed actions that agents can call and people can press as buttons, and every change can be undone.',
+      'Where I am':'Reading the codebase and running it in my fork to find a good first contribution.'
+    }, links:[
+      { label:'My fork', url:'https://code.tilo.so/mrhello291/tilo' },
+      { label:'tilo', url:'https://tilo.so' }
+    ] },
   { id:'ecommerce-nav', category:'open-source', status:'past',
     title:'Responsive navigation for an e-commerce frontend',
     summary:'Made the navbar responsive with a slide-in hamburger menu.',
@@ -357,17 +351,6 @@ PORTFOLIO.entries = [
       'The idea':'Once a day you write a letter and leave it anywhere on the planet. At midnight UTC a fresh layer of sand settles over the whole world, so every block you dig down is one day further into the past.',
       'Where it is':'Still under wraps. More details when it launches.'
     }, links:[] },
-  { id:'raiseradar', category:'fun-projects', status:'ongoing',
-    title:'RaiseRadar',
-    summary:'Finds startups that just raised a Series B or C, checks whether they are hiring, and lists every open role in one filterable page.',
-    tags:['Job-hunt tool','LLM extraction','Self-updating'], date:'Oct 2026 – present',
-    skillIds:['data-pipelines','nlp','databases','dashboards','containers'], toolIds:['python','docker'],
-    details:{
-      'The idea':'Freshly funded startups are the ones about to hire, so watch the funding news and go straight to their job boards.',
-      'How it works':'Reads funding headlines from Google News and RSS feeds, and a free LLM on OpenRouter pulls out the company, round, amount and investors. It then finds each company’s website, careers page and job board, and collects every role with its required experience, level, work mode, location, pay and full description.',
-      'What you get':'A searchable HTML report with filters for round, region, work mode, level and experience, a hiring-history line showing which companies are ramping up, and a tracker for the roles you applied to.',
-      'Running it':'Locally, as a Docker container that refreshes itself, or as a fork that rebuilds on GitHub Pages twice a day through GitHub Actions.'
-    }, links:[{ label:'Code', url:'https://github.com/mrhello291/RaiseRadar' }] },
   { id:'simple-quad', category:'fun-projects', status:'past',
     title:'Simple Quad',
     summary:'A budget quadruped for the hills around campus: Raspberry Pi, twelve servos, aluminium legs, and a PS4 controller.',
@@ -444,7 +427,6 @@ PORTFOLIO.skills = [
   {id:'databases',name:'Database design',category:'backend'},
   {id:'frontend',name:'Frontend development',category:'web'},
   {id:'dashboards',name:'Data dashboards',category:'web'},
-  {id:'linux-ipc',name:'Linux systems programming',category:'systems'},
   {id:'distributed',name:'Distributed consistency',category:'systems'},
   {id:'deployment',name:'Cloud deployment',category:'cloud'},
   {id:'containers',name:'Containers & orchestration',category:'cloud'},
@@ -454,7 +436,7 @@ PORTFOLIO.skills = [
 // A tool can support several skills. Connections appear only when that work
 // entry explicitly includes BOTH the toolId and the relevant skillId.
 PORTFOLIO.tools = [
-  {id:'python',name:'Python',skillIds:['nlp','tabular','agents','deep-learning','apis','data-pipelines','linux-ipc']},
+  {id:'python',name:'Python',skillIds:['nlp','tabular','agents','deep-learning','apis','data-pipelines']},
   {id:'gbdt',name:'LightGBM / CatBoost / XGBoost',skillIds:['tabular']},
   {id:'modal',name:'Modal',skillIds:['deployment','tabular']},
   {id:'pytorch',name:'PyTorch',skillIds:['deep-learning','tabular','generative','alignment']},
