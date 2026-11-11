@@ -348,6 +348,26 @@ PORTFOLIO.entries = [
     }, links:[{ label:'Pull request', url:'https://github.com/divyaagrawal261/E-Commerce-Frontend/pull/5' }] },
 
   /* ── Fun projects ─────────────────────────────────────── */
+  { id:'sediment', category:'fun-projects', status:'ongoing',
+    title:'Sediment',
+    summary:'A shared 2D world where each day’s letters get buried under a new layer of sand. Dig down and you go back in time.',
+    tags:['Multiplayer web game','Private for now'], date:'Oct 2026 — present',
+    skillIds:['frontend','backend'], toolIds:['typescript','react'],
+    details:{
+      'The idea':'Once a day you write a letter and leave it anywhere on the planet. At midnight UTC a fresh layer of sand settles over the whole world, so every block you dig down is one day further into the past.',
+      'Where it is':'Still under wraps. More details when it launches.'
+    }, links:[] },
+  { id:'raiseradar', category:'fun-projects', status:'ongoing',
+    title:'RaiseRadar',
+    summary:'Finds startups that just raised a Series B or C, checks whether they are hiring, and lists every open role in one filterable page.',
+    tags:['Job-hunt tool','LLM extraction','Self-updating'], date:'Oct 2026 — present',
+    skillIds:['data-pipelines','nlp','databases','dashboards','containers'], toolIds:['python','docker'],
+    details:{
+      'The idea':'Freshly funded startups are the ones about to hire, so watch the funding news and go straight to their job boards.',
+      'How it works':'Reads funding headlines from Google News and RSS feeds, and a free LLM on OpenRouter pulls out the company, round, amount and investors. It then finds each company’s website, careers page and job board, and collects every role with its required experience, level, work mode, location, pay and full description.',
+      'What you get':'A searchable HTML report with filters for round, region, work mode, level and experience, a hiring-history line showing which companies are ramping up, and a tracker for the roles you applied to.',
+      'Running it':'Locally, as a Docker container that refreshes itself, or as a fork that rebuilds on GitHub Pages twice a day through GitHub Actions.'
+    }, links:[{ label:'Code', url:'https://github.com/mrhello291/RaiseRadar' }] },
   { id:'simple-quad', category:'fun-projects', status:'past',
     title:'Simple Quad',
     summary:'A budget quadruped for the hills around campus: Raspberry Pi, twelve servos, aluminium legs, and a PS4 controller.',
