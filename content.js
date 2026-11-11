@@ -4,8 +4,8 @@
 window.PORTFOLIO = {
   profile: {
     name: 'Asif Hoda', handle: 'mrhello291',
-    tagline: 'A curious mind. A work in progress.',
-    bio: 'Final-year CSE undergrad at IIT Mandi and former SWE intern at Microsoft. I build agentic AI systems, research how generative models fail, and automate anything I have to do twice — mostly because I’m lazy.',
+    tagline: 'Lazy enough to automate it. Stubborn enough to make it work.',
+    bio: 'Final-year CSE undergrad at IIT Mandi and former SWE intern at Microsoft. I build agentic AI systems and research how generative models fail.',
     degree: 'B.Tech · Computer Science & Engineering', college: 'IIT Mandi', location: 'Himachal Pradesh, India', age: 'Final year · Class of 2027',
     about: [
       'It started in 2020 with tiny Python games and a reminder script. At IIT Mandi that habit grew into line-following robots, a quadruped built on a student budget, and a lot of hackathons.',
@@ -26,19 +26,19 @@ window.PORTFOLIO = {
         logos: [{ src: 'assets/logos/microsoft.svg', alt: 'Microsoft' }] },
       { title: 'Fetch.ai Agentic AI Hackathon · 1st prize', subtitle: 'FrostHack 2025 at IIT Mandi · Fetch.ai Innovation Lab', category: 'competitions', entry: 'frosthack-2025',
         logos: [{ src: 'assets/logos/fetchai.png', alt: 'Fetch.ai' }] },
-      { title: 'AiHack India 2026 · Best Model prize', subtitle: 'Organised by AIFUL at IIT Mandi', category: 'competitions', entry: 'aihack-2026',
+      { title: 'AiHack India 2026 · 4th prize, Best Model', subtitle: 'Organised by AIFUL at IIT Mandi', category: 'competitions', entry: 'aihack-2026',
         logos: [{ src: 'assets/logos/aiful.png', alt: 'AIFUL' }] },
-      { title: 'Inter IIT Tech Meet 14.0', subtitle: 'Observe.AI NLP challenge · IIT Patna', category: 'competitions', entry: 'inter-iit-14',
+      { title: 'Inter IIT Tech Meet 14.0 · 6th of 23 IITs', subtitle: 'Observe.AI NLP challenge · IIT Patna', category: 'competitions', entry: 'inter-iit-14',
         logos: [{ src: 'assets/logos/interiit14.png', alt: 'Inter IIT Tech Meet 14.0' }, { src: 'assets/logos/observeai.svg', alt: 'Observe.AI' }] }
     ],
     journey: [
       { date: 'Oct 2026', title: '4th prize, Best Model · AiHack India 2026', description: 'Credit-risk modelling on AIFUL’s lending data at IIT Mandi, finishing 4th on the final private leaderboard.' },
-      { date: 'May — Jul 2026', title: 'Software Engineer Intern · Microsoft', description: 'Built a multi-agent root-cause analysis service for the Azure Storage team in Bengaluru, now part of the on-call workflow.' },
-      { date: 'Feb — Apr 2026', title: 'TabGEN research', description: 'Led a project on diffusion-based synthetic tabular data that generates better minority-class rows for imbalanced datasets.' },
+      { date: 'May – Jul 2026', title: 'Software Engineer Intern · Microsoft', description: 'Built a multi-agent root-cause analysis service for the Azure Storage team in Bengaluru, now part of the on-call workflow.' },
+      { date: 'Feb – Apr 2026', title: 'TabGEN research', description: 'Led a project on diffusion-based synthetic tabular data that generates better minority-class rows for imbalanced datasets.' },
       { date: 'Dec 2025', title: '6th of 23 IITs · Inter IIT Tech Meet 14.0', description: 'Represented IIT Mandi on Observe.AI’s NLP problem statement at IIT Patna, later recognised with IIT Mandi’s Foundation Day award for technical activities.' },
-      { date: 'Sep — Nov 2025', title: 'Data Analytics Intern · Drezily', description: 'Unified three data silos into one analytics platform for a Bay Area startup, while researching hallucination reduction in LLMs.' },
+      { date: 'Sep – Nov 2025', title: 'Data Analytics Intern · Drezily', description: 'Unified three data silos into one analytics platform for a Bay Area startup, while researching hallucination reduction in LLMs.' },
       { date: 'Mar 2025', title: '1st prize · FrostHack 2025', description: 'Won the Fetch.ai-sponsored AI agent hackathon at IIT Mandi with FinnyRAG, an agentic assistant for personal finance.' },
-      { date: 'Nov 2024 — Mar 2025', title: 'Head of Web Development · Xpecto', description: 'Led the team that built the first website for IIT Mandi’s techfest and handled most of its back end.' },
+      { date: 'Nov 2024 – Mar 2025', title: 'Head of Web Development · Xpecto', description: 'Led the team that built the first website for IIT Mandi’s techfest and handled most of its back end.' },
       { date: 'Aug 2023', title: 'B.Tech Computer Science · IIT Mandi', description: 'A line-following robot in the first year, then a budget quadruped, and deep learning courses that turned into research.' },
       { date: '2023', title: 'Cracked JEE Main and JEE Advanced', description: 'Cleared both national engineering entrance exams, with a JEE Advanced rank under 5,000, and earned a seat at IIT Mandi.' },
       { date: '2020', title: 'Where it began', description: 'Small Python games and a reminder script. The start of automating things instead of doing them twice.' }
@@ -46,19 +46,19 @@ window.PORTFOLIO = {
   },
   categories: [
     { id:'jobs', title:'Jobs', place:'The workshop', number:'01', symbol:'⌘',
-      description:'Places I’ve worked. Things I’ve learned. Experiences I’ve gained.', intro:'A field journal of work, collaboration, and lessons along the way.',
+      description:'Where I’ve worked, and what I took away from it.', intro:'A field journal of work, collaboration, and lessons along the way.',
       x:14, y:39, path:'M 53 48 C 42 62 44 49 32 49 S 23 40 14 39', action:'Read role notes' },
     { id:'competitions', title:'Competitions', place:'The proving grounds', number:'02', symbol:'♜',
-      description:'A challenge. A team. Something to figure out.', intro:'Challenges entered, ideas tested, and lessons taken home.',
+      description:'Hackathons and leaderboards, ordered by what we won.', intro:'Short deadlines, real scoreboards, and what each one taught me.',
       x:33, y:33, path:'M 53 48 C 41 55 43 44 40 42 S 38 34 33 33', action:'View challenge' },
     { id:'research', title:'Research', place:'The observatory', number:'03', symbol:'✧',
       description:'Good questions lead to interesting places.', intro:'Questions, experiments, and notes from the edges of what I understand.',
       x:85, y:36, path:'M 53 48 C 65 53 66 45 72 43 S 77 36 85 36', action:'Open notebook' },
     { id:'side-quests', title:'Side Quests', place:'The automation shed', number:'04', symbol:'⚙',
-      description:'Small annoyances. Homemade solutions.', intro:'A little effort now, a little less repetitive work forever.',
+      description:'Small annoyances, fixed with code.', intro:'A little effort now, a little less repetitive work forever.',
       x:17, y:66, path:'M 53 48 C 44 63 38 59 30 66 S 21 66 17 66', action:'Inspect build' },
     { id:'open-source', title:'Open Source', place:'The shared yard', number:'05', symbol:'⌥',
-      description:'Small contributions. Shared possibilities.', intro:'Building in the open, learning from others, and leaving things a little better.',
+      description:'Pull requests to other people’s projects.', intro:'Fixes and features I contributed to codebases I used or worked on.',
       x:43, y:77, path:'M 53 48 C 49 60 56 63 52 68 S 54 76 43 77', action:'View contribution' },
     { id:'fun-projects', title:'Fun Projects', place:'The playground', number:'06', symbol:'✣',
       description:'Built to see what happens.', intro:'Experiments with no grand plan. Just curiosity and a reason to press play.',
@@ -70,8 +70,8 @@ PORTFOLIO.entries = [
   /* ── Jobs ─────────────────────────────────────────────── */
   { id:'microsoft-azure-storage', category:'jobs', status:'past',
     title:'Software Engineer Intern', org:'Microsoft', unit:'Azure Storage · Bengaluru, India · Full-time', logo:'assets/logos/microsoft.svg',
-    summary:'Agentic root-cause analysis for Azure Storage. Built a multi-agent AI service that investigates failures from feature testing and produces evidence-backed root-cause analyses.',
-    tags:['Full-time','On-site','Bengaluru, India'], date:'May 2026 — Jul 2026',
+    summary:'Built a multi-agent AI service that investigates failed feature tests and writes evidence-backed root-cause analyses for Azure Storage. It is now part of the team’s on-call workflow.',
+    tags:['Full-time','On-site','Bengaluru, India'], date:'May 2026 – Jul 2026',
     skillIds:['backend','agents','rag','llm-eval','apis','deployment','containers','data-pipelines'],
     toolIds:['aspnet','azure','kusto','mcp','docker'],
     details:{
@@ -84,8 +84,8 @@ PORTFOLIO.entries = [
     }, links:[] },
   { id:'drezily-analytics', category:'jobs', status:'past',
     title:'Data Analytics Intern', org:'Drezily Inc.', unit:'Remote (SF Bay Area) · Part-time', logo:'assets/logos/drezily.png',
-    summary:'Unified executive analytics platform. Owned the design and deployment of a dashboard joining MongoDB, GA4 and Search Console, replacing 6+ hours a week of manual reporting.',
-    tags:['Remote','Part-time'], date:'Sep 2025 — Nov 2025',
+    summary:'Designed and shipped one analytics dashboard over MongoDB, GA4 and Search Console. It replaced 6+ hours a week of manual reporting and cut load time from ~5 minutes to under 20 seconds.',
+    tags:['Remote','Part-time'], date:'Sep 2025 – Nov 2025',
     skillIds:['data-pipelines','databases','dashboards','apis'],
     toolIds:['python','streamlit','mongodb','pandas'],
     details:{
@@ -99,7 +99,7 @@ PORTFOLIO.entries = [
   { id:'xpecto-head-web', category:'jobs', status:'past',
     title:'Head of Web Development', org:'Xpecto Tech', unit:'IIT Mandi · Part-time', logo:'assets/logos/xpecto.png',
     summary:'Led the team that built the first-ever website for Xpecto ’25, IIT Mandi’s techfest, and owned most of its back end: accounts, team registrations, memberships, merch and payments.',
-    tags:['On-site','Part-time','T3 stack'], date:'Nov 2024 — Mar 2025',
+    tags:['On-site','Part-time','T3 stack'], date:'Nov 2024 – Mar 2025',
     skillIds:['backend','apis','databases','deployment'], toolIds:['typescript','nextjs','trpc','prisma','postgresql','supabase','clerk'],
     details:{
       'Organization':'Xpecto Tech, the team behind Xpecto, IIT Mandi’s annual techfest. Part-time, on-site.',
@@ -161,7 +161,7 @@ PORTFOLIO.entries = [
     tags:['Observe.AI','NLP · Mid prep','IIT Patna'], date:'Dec 2025',
     skillIds:['nlp','rag','agents','llm-eval'], toolIds:['python','huggingface','gemini'],
     details:{
-      'Result':'6th of 23 in Observe.AI’s NLP problem statement, where each IIT sent its best NLP team, so we were up against the top team from every IIT in India. IIT Mandi recognised our contingent with its Foundation Day Award for Outstanding Performance in Technical Activities 2025, presented at the 17th Foundation Day in March 2026.',
+      'Result':'6th of 23 in Observe.AI’s NLP problem statement. Each IIT sends one team per problem, so every rival was the best NLP team from its IIT. IIT Mandi recognised our contingent with its Foundation Day Award for Outstanding Performance in Technical Activities 2025, presented at the 17th Foundation Day in March 2026.',
       'Event':'Inter IIT Tech Meet 14.0, hosted by IIT Patna, 11–14 December 2025. Observe.AI set a mid-prep problem statement in NLP and conversational intelligence.',
       'The problem':'Contact centres record huge volumes of conversations, but existing tools only detect what happened, not why. We had to build a scalable, domain-agnostic system that finds the dialogue spans causing events like escalations, refunds or churn, answers follow-up questions in context, and generates its own evaluation queries.',
       'Our approach':'An LLM-powered retrieval and reasoning system that discovers business events in unlabelled conversations, gathers supporting evidence for each question, and writes grounded answers that keep context across follow-ups. It stays domain-agnostic and inexpensive to run.',
@@ -188,7 +188,7 @@ PORTFOLIO.entries = [
     links:[{ label:'Code', url:'https://github.com/pihu26112005/DLHackathon' }] },
   { id:'ai-knight', category:'competitions', status:'past',
     title:'AI-Knight', org:'IIT Jodhpur', unit:'Kaggle competition · real vs AI-generated images', result:'16th place', logo:'assets/logos/iitjodhpur.png',
-    summary:'Real vs AI-generated images. Kaggle competition by IIT Jodhpur. Fine-tuned XceptionNet and EfficientNet to spot synthetic images; finished 16th.',
+    summary:'Fine-tuned XceptionNet and EfficientNet to tell real images from AI-generated ones. Finished 16th with an F1 of 0.93 on the private leaderboard.',
     tags:['IIT Jodhpur · Kaggle','16th place'], date:'Jun 2025',
     skillIds:['deep-learning'], toolIds:['python','pytorch'],
     details:{
@@ -201,7 +201,7 @@ PORTFOLIO.entries = [
   { id:'log-analysis-ml', category:'research', status:'ongoing',
     title:'Learning which log lines matter',
     summary:'Can a model find bugs, errors and their causes in huge logs better than keyword windows around ERROR and WARN?',
-    tags:['Log analysis','Early stage'], date:'2026 — present',
+    tags:['Log analysis','Early stage'], date:'2026 – present',
     skillIds:['deep-learning','llm-eval'], toolIds:['python'],
     details:{
       'Research question':'Current extraction of failures and causes from logs is too simple. Can a learned model rank the lines that matter for root-cause analysis?',
@@ -211,7 +211,7 @@ PORTFOLIO.entries = [
   { id:'synthetic-financial-db', category:'research', status:'ongoing',
     title:'Scenario-based synthetic financial databases',
     summary:'Generating realistic synthetic financial databases driven by configurable scenarios.',
-    tags:['Synthetic data','Finance','Confidential'], date:'2026 — present',
+    tags:['Synthetic data','Finance','Confidential'], date:'2026 – present',
     skillIds:['generative','tabular'], toolIds:[],
     details:{
       'Research question':'How can we generate realistic, scenario-driven synthetic financial databases?',
@@ -220,7 +220,7 @@ PORTFOLIO.entries = [
   { id:'tabgen-ord', category:'research', status:'past',
     title:'TabGEN: better minority-class synthetic tabular data',
     summary:'Diffusion-based synthetic data for imbalanced tables. Building on ORD and TabSyn, we generate better minority-class rows without hurting the majority, using overlap-aware latent diffusion and sub-unity classifier-free guidance.',
-    tags:['Generative AI course','Tabular diffusion','Led the project'], date:'Feb 2026 — Apr 2026',
+    tags:['Generative AI course','Tabular diffusion','Led the project'], date:'Feb 2026 – Apr 2026',
     skillIds:['generative','tabular','deep-learning','llm-eval'], toolIds:['python','pytorch','optuna'],
     details:{
       'Findings':'Sub-unity classifier-free guidance was the key. On the Adult dataset, minority-class accuracy peaked when guidance strength was set below 1 and fell steadily as it rose past 1, while macro-F1 stayed stable. Combined with ORD’s overlap labels, this improved minority-class learning over the original ORD sampler.',
@@ -241,8 +241,8 @@ PORTFOLIO.entries = [
     ] },
   { id:'hallucination-aligner', category:'research', status:'past',
     title:'Hallucination Aligner',
-    summary:'Curriculum DPO-Positive on Llama 3.2 3B with easy-to-hard preference pairs, studying how far alignment can cut hallucinations before it starts costing truthfulness and instruction-following.',
-    tags:['LLM alignment','DPO','Open dataset'], date:'Sep 2025 — Nov 2025',
+    summary:'Trained Llama 3.2 3B with curriculum DPO-Positive on easy-to-hard preference pairs. Hallucinations on HaluEval fell 6.2%, and we measured what that costs in truthfulness and instruction-following.',
+    tags:['LLM alignment','DPO','Open dataset'], date:'Sep 2025 – Nov 2025',
     skillIds:['alignment','llm-eval','rag','deep-learning'], toolIds:['python','pytorch','huggingface','faiss'],
     details:{
       'Findings':'The curriculum-trained adapter cut HaluEval hallucination rate by 6.2% relative to the base model and raised BERTScore by 2.2%, but became more cautious and slipped on TruthfulQA. A second strategy reversed that: TruthfulQA generation truthfulness rose 3.1% with multiple-choice scores on par, but hallucinations rose and instruction-following weakened, a sign of catastrophic forgetting. Truthfulness, low hallucination and instructability have to be optimised together.',
@@ -259,8 +259,8 @@ PORTFOLIO.entries = [
     ] },
   { id:'laa-net-plus', category:'research', status:'past',
     title:'LAA-Net+: deepfake detection that survives noise',
-    summary:'Making a state-of-the-art face-forgery detector robust to noisy, degraded images by adding CBAM attention and a Restormer restoration front-end to LAA-Net.',
-    tags:['Computer vision','Face forgery','Team of four'], date:'Mar 2025 — May 2025',
+    summary:'Added CBAM attention and a Restormer restoration front-end to LAA-Net, a state-of-the-art face-forgery detector. Under heavy noise, AUC on FaceForensics++ rose from 55.1 to 89.1.',
+    tags:['Computer vision','Face forgery','Team of four'], date:'Mar 2025 – May 2025',
     skillIds:['deep-learning'], toolIds:['python','pytorch'],
     details:{
       'Findings':'Under Gaussian noise (σ = 0.3) on FaceForensics++, AUC rose from 55.1 for LAA-Net to 70.2 with CBAM and 89.1 with Restormer preprocessing, and average precision from 53.6 to 89.7. On Celeb-DF v2 with the same noise, the Restormer variant kept AUC at 80.9.',
@@ -277,7 +277,7 @@ PORTFOLIO.entries = [
   { id:'vectorledger', category:'side-quests', status:'ongoing',
     title:'VectorLedger',
     summary:'Prove that deleted or restricted RAG data is no longer retrievable, across every store your pipeline copied it into.',
-    tags:['Apache-2.0','v0.2'], date:'Sep 2026 — present',
+    tags:['Apache-2.0','v0.2'], date:'Sep 2026 – present',
     skillIds:['backend','rag','distributed','databases','apis','containers'], toolIds:['python','fastapi','postgresql','qdrant','redis','docker'],
     details:{
       'The annoyance':'When a document is deleted or its permissions change, its chunks, vectors and cached answers usually live on in other stores, and nobody can prove they are gone.',
@@ -288,13 +288,13 @@ PORTFOLIO.entries = [
   { id:'acos', category:'side-quests', status:'ongoing',
     title:'ACOS: an AI-native Linux userspace',
     summary:'Apps ask for capabilities like Cognitive.Language.Reason; ACOS picks a model, manages its memory, and returns a normalised result.',
-    tags:['Linux','AI infrastructure'], date:'Aug 2026 — present',
+    tags:['Linux','AI infrastructure'], date:'Aug 2026 – present',
     skillIds:['linux-ipc','agents','rag'], toolIds:['python','ollama'],
     details:{
       'The annoyance':'Every app that wants AI bundles its own model, its own runtime and its own memory budget.',
       'The solution':'Make cognition a machine-wide Linux facility: a daemon that routes capability requests to registered local or remote models.',
       'How it works':'A versioned shared-memory ABI with async request/response rings over memfd, mmap, eventfd and Unix sockets; lease-based model lifecycle with RAM/VRAM admission and idle eviction; UID/GID-based policy via SO_PEERCRED; namespaced vector memory; mock, Ollama and OpenAI-compatible connectors; systemd packaging.',
-      'Next step':'From working userspace foundation towards a real distribution.'
+      'Next step':'Grow the working userspace foundation into a real distribution.'
     }, links:[] },
   { id:'next-cf-problem', category:'side-quests', status:'past',
     title:'Next CF Problem',
@@ -351,7 +351,7 @@ PORTFOLIO.entries = [
   { id:'sediment', category:'fun-projects', status:'ongoing',
     title:'Sediment',
     summary:'A shared 2D world where each day’s letters get buried under a new layer of sand. Dig down and you go back in time.',
-    tags:['Multiplayer web game','Private for now'], date:'Oct 2026 — present',
+    tags:['Multiplayer web game','Private for now'], date:'Oct 2026 – present',
     skillIds:['frontend','backend'], toolIds:['typescript','react'],
     details:{
       'The idea':'Once a day you write a letter and leave it anywhere on the planet. At midnight UTC a fresh layer of sand settles over the whole world, so every block you dig down is one day further into the past.',
@@ -360,7 +360,7 @@ PORTFOLIO.entries = [
   { id:'raiseradar', category:'fun-projects', status:'ongoing',
     title:'RaiseRadar',
     summary:'Finds startups that just raised a Series B or C, checks whether they are hiring, and lists every open role in one filterable page.',
-    tags:['Job-hunt tool','LLM extraction','Self-updating'], date:'Oct 2026 — present',
+    tags:['Job-hunt tool','LLM extraction','Self-updating'], date:'Oct 2026 – present',
     skillIds:['data-pipelines','nlp','databases','dashboards','containers'], toolIds:['python','docker'],
     details:{
       'The idea':'Freshly funded startups are the ones about to hire, so watch the funding news and go straight to their job boards.',
@@ -371,12 +371,12 @@ PORTFOLIO.entries = [
   { id:'simple-quad', category:'fun-projects', status:'past',
     title:'Simple Quad',
     summary:'A budget quadruped for the hills around campus: Raspberry Pi, twelve servos, aluminium legs, and a PS4 controller.',
-    tags:['Robotics','Team build'], date:'Nov 2024 — Jun 2025',
+    tags:['Robotics','Team build'], date:'Nov 2024 – Jun 2025',
     skillIds:['control','embedded'], toolIds:['python','raspberrypi','gazebo'],
     details:{
       'The idea':'Prove that a Dingo-style quadruped is possible for second-year undergrads on a student budget, rugged enough for hilly terrain.',
       'What we tried':'Dropped the Arduino Nano and drove twelve PWM servos straight from a Raspberry Pi 4B through a PCA9685, powered by a battery with two buck converters. Soft aluminium legs, a 2 mm aluminium sheet chassis, an IMU to fix drift, Gazebo for simulation, and a DualShock 4 over Bluetooth.',
-      'Happy accidents':'It trots and rests. The jerky gait turned out to be mechanical, not the controller.',
+      'Where it stands':'It trots and rests. The jerky gait turned out to be mechanical, not the controller.',
       'What is next':'A mechanical overhaul, a smoother trot, and the Lidar and LCD that are wired but not yet integrated.'
     }, links:[
       { label:'Code', url:'https://github.com/mrhello291/SimpleQuad' },
@@ -413,7 +413,7 @@ PORTFOLIO.entries = [
       'The idea':'Make a line follower smooth rather than twitchy.',
       'How we built it':'Designed the chassis in SolidWorks, designed the PCB in EasyEDA and printed it, tested on a breadboard, then soldered it all together around an Arduino UNO, motor drivers, a LiPo battery and a buck converter.',
       'How it works':'Four IR sensors: the middle two follow the black line and the outer two the white. The PID output adjusts motor speeds; tuning Kp, Ki and Kd made the difference.',
-      'What is next':'It already handles curves and crossing lines; both are on video above.'
+      'Result':'It handles both curves and crossing lines. Both are on video below.'
     }, links:[
       { label:'Code', url:'https://github.com/mrhello291/IC102P-FDP' },
       { label:'Curved lines', url:'https://www.youtube.com/watch?v=1QRYZWzfOks' },

@@ -115,7 +115,8 @@
     current = route;
     const cat = categoryFor(route);
     document.body.dataset.page = route;
-    document.title = `${cat?.title || {home:'A world of ideas',work:'The Neural Tree',skills:'Skills',about:'About'}[route]} · ${profile.name}`;
+    const pageTitle = cat?.title || {work:'My work',skills:'Skills',about:'About'}[route];
+    document.title = pageTitle ? `${pageTitle} · ${profile.name}` : profile.name;
     main.innerHTML = cat ? destination(cat) : route==='work' ? map() : route==='skills' ? skillsPage() : route==='about' ? about() : home();
     scenery.style.backgroundImage = `url("assets/${imageFor(route)}.png")`;
     scenery.style.transformOrigin = 'center'; scenery.style.transform = '';
