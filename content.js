@@ -115,6 +115,27 @@ PORTFOLIO.entries = [
     ] },
 
   /* ── Competitions ─────────────────────────────────────── */
+  { id:'frosthack-2025', category:'competitions', status:'past',
+    title:'Fetch.ai Agentic AI Hackathon 2025', org:'Fetch.ai Innovation Lab', unit:'FrostHack 2025 at IIT Mandi · AI agent hackathon', result:'1st prize', medal:'gold', logo:'assets/logos/fetchai.png',
+    summary:'FinnyRAG: drop in your bank statements and ask about your money in plain language. A team of Fetch.ai agents parses the documents, finds the right transactions, answers questions and draws charts.',
+    tags:['FrostHack 2025','1st prize','Team of two'], date:'Mar 2025',
+    skillIds:['backend','agents','rag','apis','dashboards'],
+    toolIds:['python','langgraph','streamlit','pathway','gemini'],
+    details:{
+      'Result':'1st prize at FrostHack 2025, the AI agent hackathon of Xpecto ’25 at IIT Mandi, sponsored by Fetch.ai Innovation Lab, among 111 registered participants.',
+      'Event':'FrostHack 2025, the Xpecto ’25 AI Agent Hackathon at IIT Mandi powered by Fetch.ai Innovation Lab. Held online, 29–31 March 2025, with ₹50,000 in cash prizes.',
+      'The idea':'Personal finances live in PDFs nobody wants to read. FinnyRAG turns them into something you can simply ask: “How much did I spend on food last month?”, “Show my biggest transfers”, “Why is my balance lower than usual?”',
+      'What we built':'A parsing agent combines an LLM with regular expressions to turn statements into a structured transaction table. The table is chunked into text files in Google Drive, which feeds a Pathway vector store that updates live as new documents arrive. Separate agents handle net-spend visualisation, query-driven charts, relevant-document fetching and transaction search, and a question-answering agent uses a modified adaptive RAG loop. Everything runs as Fetch.ai agents on Agentverse, coordinated through LangGraph, behind a Streamlit app with home, chat and search pages.'
+    },
+    gallery:[
+      { src:'assets/work/finnyrag/app-diagram.jpg', alt:'FinnyRAG architecture: parsing agent, output table, Pathway dynamic vector store, visualising, fetching, query and question-answering agents', caption:'App architecture', fit:'contain' },
+      { src:'assets/work/finnyrag/agent-diagram.jpg', alt:'Fetch.ai agent diagram for FinnyRAG', caption:'Fetch.ai agents', fit:'contain' }
+    ],
+    links:[
+      { label:'Code', url:'https://github.com/mrhello291/financeTrackerFrosthack2k25' },
+      { label:'Demo video', url:'https://www.youtube.com/watch?v=DY6-u3Y996Q' },
+      { label:'Devpost', url:'https://ai-agent-hackatho.devpost.com/project-gallery' }
+    ] },
   { id:'aihack-2026', category:'competitions', status:'past',
     title:'AiHack India 2026', org:'AIFUL Corporation', unit:'Held at IIT Mandi · Credit-risk modelling', result:'4th prize · Best Model', medal:'steel', logo:'assets/logos/aiful.png',
     summary:'Predicting which borrowers will default by month 24 from AIFUL’s anonymised lending data. Team KamandNet finished 4th on the final private leaderboard in the Best Model category.',
@@ -150,17 +171,6 @@ PORTFOLIO.entries = [
       { src:'assets/work/interiit14/award.jpg', alt:'IIT Mandi Foundation Day Award for Outstanding Performance in Technical Activities 2025', caption:'IIT Mandi Foundation Day award' }
     ],
     links:[] },
-  { id:'ai-knight', category:'competitions', status:'past',
-    title:'AI-Knight', org:'IIT Jodhpur', unit:'Kaggle competition · real vs AI-generated images', result:'16th place', logo:'assets/logos/iitjodhpur.png',
-    summary:'Real vs AI-generated images. Kaggle competition by IIT Jodhpur. Fine-tuned XceptionNet and EfficientNet to spot synthetic images; finished 16th.',
-    tags:['IIT Jodhpur · Kaggle','16th place'], date:'Jun 2025',
-    skillIds:['deep-learning'], toolIds:['python','pytorch'],
-    details:{
-      'Event':'AI-Knight, hosted by IIT Jodhpur on Kaggle.',
-      'The challenge':'Classify CIFAKE-style images as real or AI-generated.',
-      'Our approach':'Fine-tuned XceptionNet and EfficientNet backbones on Kaggle T4 GPUs and compared them.',
-      'Result':'16th place, with an F1 of 0.93 on the private leaderboard and 0.91 on public.'
-    }, links:[{ label:'Code', url:'https://github.com/AL-ETERNITY/AI-Knight' }] },
   { id:'matlab-troubleshooter', category:'competitions', status:'past',
     title:'HCLTech Deep Learning Hackathon', org:'HCLTech', unit:'At IIT Mandi · CS671 Deep Learning course', result:'11th place', logo:'assets/logos/hcltech.png',
     summary:'A MATLAB troubleshooting assistant: ask about an error or paste a screenshot, and get an answer grounded in MATLAB’s documentation, with citations.',
@@ -176,27 +186,17 @@ PORTFOLIO.entries = [
       { src:'assets/work/matlab-bot/frontend-flow.jpg', alt:'Frontend user flow of the MATLAB troubleshooting chatbot', caption:'User flow', fit:'contain' }
     ],
     links:[{ label:'Code', url:'https://github.com/pihu26112005/DLHackathon' }] },
-  { id:'frosthack-2025', category:'competitions', status:'past',
-    title:'Fetch.ai Agentic AI Hackathon 2025', org:'Fetch.ai Innovation Lab', unit:'FrostHack 2025 at IIT Mandi · AI agent hackathon', result:'1st prize', medal:'gold', logo:'assets/logos/fetchai.png',
-    summary:'FinnyRAG: drop in your bank statements and ask about your money in plain language. A team of Fetch.ai agents parses the documents, finds the right transactions, answers questions and draws charts.',
-    tags:['FrostHack 2025','1st prize','Team of two'], date:'Mar 2025',
-    skillIds:['backend','agents','rag','apis','dashboards'],
-    toolIds:['python','langgraph','streamlit','pathway','gemini'],
+  { id:'ai-knight', category:'competitions', status:'past',
+    title:'AI-Knight', org:'IIT Jodhpur', unit:'Kaggle competition · real vs AI-generated images', result:'16th place', logo:'assets/logos/iitjodhpur.png',
+    summary:'Real vs AI-generated images. Kaggle competition by IIT Jodhpur. Fine-tuned XceptionNet and EfficientNet to spot synthetic images; finished 16th.',
+    tags:['IIT Jodhpur · Kaggle','16th place'], date:'Jun 2025',
+    skillIds:['deep-learning'], toolIds:['python','pytorch'],
     details:{
-      'Result':'1st prize at FrostHack 2025, the AI agent hackathon of Xpecto ’25 at IIT Mandi, sponsored by Fetch.ai Innovation Lab, among 111 registered participants.',
-      'Event':'FrostHack 2025, the Xpecto ’25 AI Agent Hackathon at IIT Mandi powered by Fetch.ai Innovation Lab. Held online, 29–31 March 2025, with ₹50,000 in cash prizes.',
-      'The idea':'Personal finances live in PDFs nobody wants to read. FinnyRAG turns them into something you can simply ask: “How much did I spend on food last month?”, “Show my biggest transfers”, “Why is my balance lower than usual?”',
-      'What we built':'A parsing agent combines an LLM with regular expressions to turn statements into a structured transaction table. The table is chunked into text files in Google Drive, which feeds a Pathway vector store that updates live as new documents arrive. Separate agents handle net-spend visualisation, query-driven charts, relevant-document fetching and transaction search, and a question-answering agent uses a modified adaptive RAG loop. Everything runs as Fetch.ai agents on Agentverse, coordinated through LangGraph, behind a Streamlit app with home, chat and search pages.'
-    },
-    gallery:[
-      { src:'assets/work/finnyrag/app-diagram.jpg', alt:'FinnyRAG architecture: parsing agent, output table, Pathway dynamic vector store, visualising, fetching, query and question-answering agents', caption:'App architecture', fit:'contain' },
-      { src:'assets/work/finnyrag/agent-diagram.jpg', alt:'Fetch.ai agent diagram for FinnyRAG', caption:'Fetch.ai agents', fit:'contain' }
-    ],
-    links:[
-      { label:'Code', url:'https://github.com/mrhello291/financeTrackerFrosthack2k25' },
-      { label:'Demo video', url:'https://www.youtube.com/watch?v=DY6-u3Y996Q' },
-      { label:'Devpost', url:'https://ai-agent-hackatho.devpost.com/project-gallery' }
-    ] },
+      'Event':'AI-Knight, hosted by IIT Jodhpur on Kaggle.',
+      'The challenge':'Classify CIFAKE-style images as real or AI-generated.',
+      'Our approach':'Fine-tuned XceptionNet and EfficientNet backbones on Kaggle T4 GPUs and compared them.',
+      'Result':'16th place, with an F1 of 0.93 on the private leaderboard and 0.91 on public.'
+    }, links:[{ label:'Code', url:'https://github.com/AL-ETERNITY/AI-Knight' }] },
   /* ── Research ─────────────────────────────────────────── */
   { id:'log-analysis-ml', category:'research', status:'ongoing',
     title:'Learning which log lines matter',
