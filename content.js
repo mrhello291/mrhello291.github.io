@@ -5,7 +5,7 @@ window.PORTFOLIO = {
   profile: {
     name: 'Asif Hoda', handle: 'mrhello291',
     tagline: 'Lazy enough to automate it. Stubborn enough to make it work.',
-    bio: 'Final-year CSE undergrad at IIT Mandi and former SWE intern at Microsoft. I build agentic AI systems and research how generative models fail.',
+    bio: 'Final-year CSE undergrad (Class of 2027) at IIT Mandi and former SWE intern at Microsoft. I build agentic AI systems and research how generative models fail.',
     degree: 'B.Tech · Computer Science & Engineering', college: 'IIT Mandi', location: 'Himachal Pradesh, India', age: 'Final year · Class of 2027',
     about: [
       'It started in 2020 with tiny Python games and a reminder script. At IIT Mandi that habit grew into line-following robots, a quadruped built on a student budget, and a lot of hackathons.',
