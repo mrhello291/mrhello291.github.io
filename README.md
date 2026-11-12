@@ -57,7 +57,8 @@ Every details key becomes a section in the reading panel. This lets you tailor e
 - `world.css`: layouts, theme, responsive rules and animation
 - `world.js`: navigation, rendering, entry dialogs and motion
 - `content.js`: editable content
-- `assets/*.png`: clean scene artwork
+- `assets/*.webp`: scene artwork loaded by the site (re-export from the `*.png` masters with `cwebp -q 82 -m 6 -sharp_yuv NAME.png -o NAME.webp`)
+- `assets/og-image.jpg`: 1200×630 link-preview card (cropped from `tree.png`)
 - `assets/PROMPTS.md`: image-generation specification and provenance
 - `legacy/`: preserved earlier website implementation
 
