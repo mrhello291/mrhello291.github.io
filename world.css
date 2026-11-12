@@ -71,3 +71,17 @@ body.depth-on .site-header:before{background:linear-gradient(180deg,#071326fa,#0
 .ongoing-drop>summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
 .ongoing-drop .ongoing-list{padding:0 12px 12px}
 .ongoing-drop .work-card{background:#0a2038f2}
+/* Home: "What am I doing right now?" is a closed dropdown that opens to the ongoing list. */
+.right-now{padding:0}
+.right-now>summary{display:flex;align-items:center;gap:12px;list-style:none;cursor:pointer;padding:14px 20px;user-select:none;transition:background .2s}
+.right-now>summary::-webkit-details-marker{display:none}
+.right-now .now-q{flex:1;font-size:14px;font-weight:500;transition:color .2s}
+.right-now .now-q:before{content:'';display:inline-block;width:6px;height:6px;margin:0 12px 2px 0;border-radius:50%;background:#a2f6c4;box-shadow:0 0 10px #a2f6c488;animation:now-pulse 2.4s ease-in-out infinite}
+.right-now .now-count{font:10px var(--mono);color:var(--muted)}
+.right-now>summary:after{content:'';flex:none;width:7px;height:7px;margin:-3px 2px 0 4px;border-right:1.5px solid var(--cyan);border-bottom:1.5px solid var(--cyan);transform:rotate(45deg);transition:transform .2s}
+.right-now[open]>summary:after{margin-top:3px;transform:rotate(-135deg)}
+.right-now>summary:hover{background:#0f2a40}.right-now>summary:hover .now-q{color:var(--cyan)}
+.right-now>summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.right-now ul{padding:0 20px 8px;border-top:1px solid #90dbea22}
+@keyframes now-pulse{50%{opacity:.45}}
+@media(max-width:760px){.right-now>summary{padding:12px 14px}.right-now ul{padding:0 14px 6px}.right-now .now-q{font-size:13px}}
