@@ -45,7 +45,7 @@ Every details key becomes a section in the reading panel. This lets you tailor e
 
 - Homepage with scholar background, quick profile, highlights and map entry.
 - Neural Tree with six keyboard-accessible destinations and illuminated routes on hover/focus.
-- 2.5D backgrounds: each plate is a WebGL mesh displaced by its depth map, with mouse parallax. Choosing a place on the Neural Tree flies the camera toward that landmark and crossfades into the destination; going back plays the flight in reverse. Without WebGL2 or with reduced motion, the flat images are used.
+- 2.5D backgrounds: each plate is drawn as two WebGL layers displaced by depth (a back layer with pop-out objects removed, and those objects cut out in front), with mouse parallax. Choosing a place on the Neural Tree flies the camera toward that landmark and crossfades into the destination; going back plays the flight in reverse. Without WebGL2 or with reduced motion, the flat images are used.
 - Six category layouts with ongoing and past work; each entry opens a native dialog reading panel.
 - About page with a journey timeline; contact page and social links.
 - Browser back/forward, direct hash routes and remembered page scroll positions.
@@ -59,7 +59,7 @@ Every details key becomes a section in the reading panel. This lets you tailor e
 - `depth.js`: 2.5D depth renderer; tune depth, parallax and flight time in its `SETTINGS` block
 - `content.js`: editable content
 - `assets/*.webp`: scene artwork loaded by the site (re-export from the `*.png` masters with `cwebp -q 82 -m 6 -sharp_yuv NAME.png -o NAME.webp`)
-- `assets/depth/*.png`: depth maps (white = near) for the plates, made with `tools/make-depth.py`
+- `assets/depth/`: per plate, `NAME.png` (R = front depth, G = back depth, white = near), `NAME-mask.png` (front cut-out) and `NAME-back.webp` (plate with the front objects removed), made with `tools/make-layers.py`
 - `assets/og-image.jpg`: 1200×630 link-preview card (cropped from `tree.png`)
 - `assets/PROMPTS.md`: image-generation specification and provenance
 - `legacy/`: preserved earlier website implementation
@@ -118,17 +118,18 @@ remain demo data. Run `node check-skills.cjs` in this folder to validate the lin
 rules, including shared-work evidence and independence of tool and radar counts.
 
 
-## Depth maps
+## Depth layers
 
-The 2.5D backgrounds need one depth map per plate in `assets/depth/`. They were made with
+The 2.5D backgrounds need three files per plate in `assets/depth/`. Depth comes from
 Depth Anything V2 Base (ONNX, `onnx-community/depth-anything-v2-base`, CC BY-NC 4.0) on the CPU.
-After changing a plate, regenerate its map:
+`tools/make-layers.py` then finds objects that pop out of their surroundings, cuts them out
+along the painting's own edges, and fills the gap behind them. After changing a plate:
 
 ```sh
 python3 -m venv .venv && .venv/bin/pip install onnxruntime numpy pillow
 # download onnx/model.onnx from the Hugging Face repo above, then:
-.venv/bin/python tools/make-depth.py model.onnx assets assets/depth-out home tree
-# copy assets/depth-out/NAME-depth.png to assets/depth/NAME.png
+.venv/bin/python tools/make-layers.py model.onnx assets assets/depth .depth-cache home tree
 ```
 
-`lab/depth.html` (not committed) is a local sandbox with sliders for the depth settings.
+Tune `THRESHOLD` (how far something must pop out to be cut out) at the top of the script.
+`lab/depth.html` (not committed) is an older single-layer sandbox for the camera settings.

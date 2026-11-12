@@ -3,3 +3,4 @@ preview*.png
 preview*.jpg
 check-skills.cjs
 lab/
+.depth-cache/

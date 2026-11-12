@@ -19,7 +19,7 @@
   // for no WebGL2, reduced motion, a lost GPU context or a failed load.
   let depth = motion && window.DepthWorld ? window.DepthWorld.create() : null, depthShown = false, mapSpots = [];
   const depthActive = () => !!depth && motion && !depth.lost;
-  function dropDepth() { depth = null; document.body.classList.remove('depth-on'); document.body.classList.remove('travelling'); }
+  function dropDepth() { depth = null; document.body.classList.remove('depth-on'); document.body.classList.remove('travelling'); scenery.style.backgroundImage = `url("assets/${imageFor(current)}.webp")`; }
   if (depth) { scenery.after(depth.el); depth.onLost = dropDepth; }
   // Mirrors the mobile background-position rules in world.css.
   // Phones anchor to the top and skip the arrival step-in, so the scholar keeps his head.
@@ -118,6 +118,12 @@
     if (categoryFor(parts[0])) return parts[0];
     return 'home';
   }
+  // Preload scenes one at a time, only while nothing is animating, so uploads never land mid-motion.
+  function warmUp(list) {
+    if (!list.length || current!=='work' || !depthActive()) return;
+    if (depth.busy || navigating) { setTimeout(()=>warmUp(list),400); return; }
+    depth.load(list[0]).catch(()=>{}).finally(()=>setTimeout(()=>warmUp(list.slice(1)),350));
+  }
   function render(route, restore=false, keepDepth=false) {
     if(dialog.open) dialog.close();
     document.body.classList.remove('modal-open');
@@ -127,7 +133,8 @@
     const pageTitle = cat?.title || {work:'My work',skills:'Skills',about:'About'}[route];
     document.title = pageTitle ? `${pageTitle} · ${profile.name}` : profile.name;
     main.innerHTML = cat ? destination(cat) : route==='work' ? map() : route==='skills' ? skillsPage() : route==='about' ? about() : home();
-    scenery.style.backgroundImage = `url("assets/${imageFor(route)}.webp")`;
+    // The flat image is only the fallback; while the 3D view is up, skip decoding it mid-flight.
+    if (!depthActive() || !depthShown) scenery.style.backgroundImage = `url("assets/${imageFor(route)}.webp")`;
     scenery.style.transformOrigin = 'center'; scenery.style.transform = '';
     if (depthActive() && !keepDepth) depth.show(imageFor(route), viewFor(route)).then(()=>{ depthShown=true; updateMotion(); }).catch(dropDepth);
     depth?.hold(false);
@@ -136,6 +143,8 @@
     document.querySelector('#announcement').textContent = `${cat?.title || route} page`;
     wireMap();
     // On the Neural Tree, labels follow their landmarks as the 3D view drifts.
+    // On the Neural Tree, warm up the six destinations one at a time so a click never waits.
+    if (route==='work' && depthActive()) warmUp(categories.map(c=>c.id));
     mapSpots = route==='work' ? [...document.querySelectorAll('[data-node]')].map(el=>({el,x:categoryFor(el.dataset.node).x,y:categoryFor(el.dataset.node).y})).concat([...document.querySelectorAll('[data-core]')].map(el=>({el,x:53,y:46}))) : [];
   }
   async function navigate(route, restore=false) {
@@ -152,14 +161,16 @@
       const scene = imageFor(route), opts = viewFor(route);
       const fromSpot = categoryFor(current) || (current==='skills' ? {x:53,y:46} : null);
       try {
-        await Promise.all([depth.load(scene), depth.load('tree')]);
+        // Let the old page fade out while the scene loads, then build the new page while it
+        // is hidden and the camera is still at rest, so the DOM work never lands mid-motion.
+        await Promise.all([depth.load(scene), depth.load('tree'), new Promise(r=>setTimeout(r,170))]);
         if (token!==navigationToken) return;
+        render(route, restore, true);
         const run = travelFromMap ? depth.fly(scene, [category.x/100, category.y/100], { focus: opts.focus, treeFocus: viewFor('work').focus })
           : route==='work' && fromSpot ? depth.flyBack([fromSpot.x/100, fromSpot.y/100], { treeFocus: opts.focus })
           : depth.dissolve(scene, opts);
         await run.swap;
         if (token!==navigationToken) return;
-        render(route, restore, true);
       } catch { if (token!==navigationToken) return; dropDepth(); render(route, restore); }
       main.focus({preventScroll:true});
       document.body.classList.remove('travelling');
@@ -201,6 +212,7 @@
     focusReturn = trigger;
     document.querySelector('#detail-body').innerHTML = `<div class="eyebrow">${escape(cat.title)} / ${entry.status==='ongoing'?'Ongoing':'Past work'}</div><h2 id="detail-title">${escape(entry.title)}</h2>${entry.result?`<div class="detail-result">${resultBadge(entry)}</div>`:''}${entry.org?`<div class="detail-org">${entry.logo?`<img src="${escape(entry.logo)}" alt="" width="28" height="28">`:''}${entry.partnerLogo?`<img src="${escape(entry.partnerLogo.src)}" alt="${escape(entry.partnerLogo.alt)}" title="${escape(entry.partnerLogo.alt)}" width="28" height="28">`:''}<span><b>${escape(entry.org)}</b>${entry.unit?' · '+escape(entry.unit):''}</span></div>`:''}<div class="entry-meta">${escape(entry.date)}</div><p class="detail-summary">${escape(entry.summary)}</p><div class="tags">${(entry.skillIds||[]).map(id=>PORTFOLIO.skills?.find(s=>s.id===id)).filter(Boolean).map(s=>`<span class="tag skill-tag">${escape(s.name)}</span>`).join('')}${entry.tags.map(t=>`<span class="tag">${escape(t)}</span>`).join('')}</div>${entryTools(entry)}${detailList(entry,true)}${entry.links.length?`<div class="detail-links">${entry.links.filter(l=>safeURL(l.url)).map(l=>`<a class="button" href="${safeURL(l.url)}" target="_blank" rel="noopener noreferrer">${escape(l.label)} ↗</a>`).join('')}</div>`:''}${entry.gallery?.length?`<div class="detail-gallery">${entry.gallery.map(g=>`<figure${g.fit==='contain'?' class="fit-contain"':''}><a href="${escape(g.src)}" target="_blank" rel="noopener"><img src="${escape(g.src)}" alt="${escape(g.alt||g.caption||'')}" loading="lazy"></a>${g.caption?`<figcaption>${escape(g.caption)}</figcaption>`:''}</figure>`).join('')}</div>`:''}${detailList(entry,false)}<p class="detail-footer">${escape(cat.place)} / ${entry.status==='ongoing'?'Notes from a work in progress':'A chapter from the archive'}</p>`;
     dialog.showModal();dialog.scrollTop=0;document.body.classList.add('modal-open');
+    if(depth) depth.paused = true; // the scene is hidden behind the reading panel
   }
   document.addEventListener('click',event=>{
     if(event.target.closest('[data-core]')) { location.hash='#/skills'; return; }
@@ -231,7 +243,7 @@
   });
   document.querySelector('.close-detail').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',e=>{if(e.target===dialog && e.clientX<dialog.getBoundingClientRect().left)dialog.close();});
-  dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');focusReturn?.focus({preventScroll:true});});
+  dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');if(depth) depth.paused=!motion;focusReturn?.focus({preventScroll:true});});
   function updateMotion() {
     document.body.classList.toggle('motion-off',!motion);
     document.body.classList.toggle('depth-on',depthActive() && depthShown);
@@ -242,7 +254,8 @@
   depth?.onFrame(()=>{
     if(!mapSpots.length) return;
     const on = innerWidth>=761 && current==='work';
-    for(const s of mapSpots){ if(!on){ s.el.style.translate=''; continue; } const [dx,dy]=depth.offset(s.x/100,s.y/100); s.el.style.translate=`${dx.toFixed(1)}px ${dy.toFixed(1)}px`; }
+    // Only touch the DOM when a label actually moves, to keep style work out of the frame.
+    for(const s of mapSpots){ const [dx,dy]=on?depth.offset(s.x/100,s.y/100):[0,0]; const v=on?`${dx.toFixed(1)}px ${dy.toFixed(1)}px`:''; if(v!==s.v){ s.el.style.translate=v; s.v=v; } }
   });
   let pointerFrame = 0;
   window.addEventListener('pointermove',e=>{
