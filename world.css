@@ -51,8 +51,8 @@ body.depth-on #depth{opacity:1}
 body[data-page="skills"] #depth{filter:blur(3px);transform:scale(1.2)}
 body.travelling main{opacity:0;transition:opacity .16s;pointer-events:none}
 main{transition:opacity .35s}
-/* The 3D view is zoomed by 1/.9 so parallax never shows the edge; scale the map canvas to match. */
-@media(min-width:761px){body.depth-on .map-canvas{width:calc(max(100vw,150vh) / .9);height:calc(max(100vh,66.6667vw) / .9)}}
+/* The 3D view is zoomed by 1/.92 so parallax never shows the edge; scale the map canvas to match. */
+@media(min-width:761px){body.depth-on .map-canvas{width:calc(max(100vw,150vh) / .92);height:calc(max(100vh,66.6667vw) / .92)}}
 /* The header backdrop spans 100vw, which includes the scrollbar; clip it instead of scrolling sideways. */
 body{overflow-x:clip}
 /* Frosted panels re-blur the moving 3D scene every frame, which stutters on integrated GPUs.

@@ -19,8 +19,11 @@
   // that ray, so from the resting viewpoint the painting is reproduced exactly.
   const IMG_TAN_Y = Math.tan(20 * Math.PI / 180), IMG_TAN_X = IMG_TAN_Y * 1.5;
   const NEAR = 1, FAR = 10, FOCUS = 3;
-  const OVERSCAN = 0.9;               // world.css sizes the map canvas to match (/ .9)
-  const ARRIVE = [0, 0, -0.22];       // resting eye on destination pages: a step into the scene
+  const OVERSCAN = 0.92;              // crop margin for parallax; world.css sizes the map canvas to match (/ .92)
+  // Every page rests at the painting's own viewpoint. Stepping the camera into the scene
+  // enlarged near subjects (the scholar) far more than the background and looked wrong.
+  const ARRIVE = [0, 0, 0];
+  const PARALLAX_SHIFT = 0.022;       // background shift against the subject at parallax 1, in view units
   const DOLLY = 0.5, TURN = 0.3, FADE_START = 0.38, FADE_LEN = 0.28, FLIGHT_ZOOM = 0.12;
 
   const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
@@ -138,6 +141,10 @@ void main(){
         const c = document.createElement('canvas'); c.width = depth.width; c.height = depth.height;
         const cx = c.getContext('2d', { willReadFrequently: true }); cx.drawImage(depth, 0, 0);
         Object.assign(sc, { w: c.width, h: c.height, data: cx.getImageData(0, 0, c.width, c.height).data });
+        const front = [];
+        for (let i = 0; i < sc.data.length; i += 16) if (sc.data[i] - sc.data[i + 1] > 20) front.push(sc.data[i]);
+        front.sort((a, b) => a - b);
+        sc.pivot = Math.min(4, Math.max(1.15, zOf(front.length ? front[front.length >> 1] / 255 : 0.4)));
         [color, back, depth, mask].forEach(b => b.close());
         ready.set(name, sc); evict(); return sc;
       }).catch(e => { scenes.delete(name); throw e; }));
@@ -192,11 +199,20 @@ void main(){
     }, { passive: true });
     // Parallax + idle drift, as an offset of the eye. The eye slides while looking at the
     // focus plane: nearer things move one way, the mountains drift the other.
-    function offset(now) {
-      const k = 0.09 * SETTINGS.parallax * (1 - holdK), still = 1 - holdK;
-      return [Math.sin(now * 0.00023) * 0.012 * still + pointer.sx * k, Math.sin(now * 0.00031) * 0.008 * still - pointer.sy * k * 0.6, 0];
+    // The camera pivots on the scene's main subject (sc.pivot), so the subject stays put while
+    // the background drifts against the mouse, like the old flat site but with depth. The swing
+    // is sized for a consistent background shift and capped so near edges never show.
+    function swing(sc) {
+      const z = sc.pivot, margin = (IMG_TAN_X - tanX) * 0.85;
+      const forBackground = PARALLAX_SHIFT / Math.max(0.05, 1 / z - 1 / FAR);
+      const forForeground = margin / Math.max(0.05, 1 / NEAR - 1 / z);
+      return Math.min(forBackground, forForeground);
     }
-    const restCam = (now, base) => ({ eye: add(base, offset(now)), target: add(base, [0, 0, -FOCUS]) });
+    function offset(now, sc) {
+      const e = swing(sc) * (1 - holdK), k = e * SETTINGS.parallax;
+      return [-(pointer.sx * k + Math.sin(now * 0.00023) * e * 0.15), pointer.sy * k * 0.6 + Math.sin(now * 0.00031) * e * 0.1, 0];
+    }
+    const restCam = (now, base, sc) => ({ eye: add(base, offset(now, sc)), target: add(base, [0, 0, -sc.pivot]) });
 
     function drawLayer(front, sc, vp, alpha, move) {
       gl.uniform1f(U.uFront, front ? 1 : 0);
@@ -269,7 +285,7 @@ void main(){
         if (!lastCam || !view || view.sc.name !== 'tree' || anim) return [0, 0];
         const p = pointAt(u, v, depthAt(view.sc, u, v));
         const at = cam => { const m = mul(projFor(view.focus), lookAt(cam.eye, cam.target)); const x = m[0] * p[0] + m[4] * p[1] + m[8] * p[2] + m[12], y = m[1] * p[0] + m[5] * p[1] + m[9] * p[2] + m[13], w = m[3] * p[0] + m[7] * p[1] + m[11] * p[2] + m[15]; return [(x / w * .5 + .5) * W, (.5 - y / w * .5) * H]; };
-        const a = at(lastCam), b = at({ eye: view.base, target: add(view.base, [0, 0, -FOCUS]) });
+        const a = at(lastCam), b = at({ eye: view.base, target: add(view.base, [0, 0, -view.sc.pivot]) });
         return [a[0] - b[0], a[1] - b[1]];
       },
       onFrame(fn) { frameHook = fn; },
@@ -294,9 +310,10 @@ void main(){
         const settle = 1 - smooth(clamp01(t / 0.4));
         const base = lerp3([0, 0, 0], scale(a.p, DOLLY), ease(t));
         const look = norm(lerp3([0, 0, -1], norm(a.p), TURN * easeOut(clamp01(t * 1.4))));
-        const flyCam = { eye: add(base, scale(offset(now), settle)), target: add(base, scale(look, FOCUS)) };
+        const restTarget = lerp3([0, 0, -a.tree.pivot], [0, 0, -FOCUS], smooth(clamp01(t / 0.3)));
+        const flyCam = { eye: add(base, scale(offset(now, a.tree), settle)), target: add(base, scale(look, -restTarget[2])) };
         const fade = smooth(clamp01((t - FADE_START) / FADE_LEN));
-        const destCam = restCam(now, lerp3([0, 0, 0.05], ARRIVE, easeOut(clamp01((t - FADE_START) / (1 - FADE_START)))));
+        const destCam = restCam(now, lerp3([0, 0, 0.06], ARRIVE, easeOut(clamp01((t - FADE_START) / (1 - FADE_START)))), a.dest);
         // Zoom only ever increases with t: a zoom that eased back while the camera still moved
         // forward read as a stall.
         if (fade < 1) draw(a.tree, flyCam, 1, Math.min(1, Math.hypot(...base) / 0.5), a.treeFocus, 1 + FLIGHT_ZOOM * smooth(clamp01(t / 0.66)));
@@ -306,12 +323,13 @@ void main(){
         if (raw >= 1) finish();
       } else if (anim?.type === 'dissolve') {
         const a = anim, t = clamp01((now - a.t0) / a.dur), f = smooth(clamp01(t / 0.6));
-        draw(a.from.sc, restCam(now, lerp3(a.from.base, add(a.from.base, [0, 0, -0.18]), easeOut(t))), 1, 0, a.from.focus);
-        draw(a.end.sc, restCam(now, lerp3(add(a.end.base, [0, 0, 0.08]), a.end.base, easeOut(t))), f, 0, a.end.focus);
+        // A small step only: near subjects grow quickly as the camera moves toward them.
+        draw(a.from.sc, restCam(now, lerp3(a.from.base, add(a.from.base, [0, 0, -0.07]), easeOut(t)), a.from.sc), 1, 0, a.from.focus);
+        draw(a.end.sc, restCam(now, lerp3(add(a.end.base, [0, 0, 0.05]), a.end.base, easeOut(t)), a.end.sc), f, 0, a.end.focus);
         if (t > 0.3) a.swap.resolve();
         if (t >= 1) finish();
       }
-      if (!anim && view) { lastCam = restCam(now, view.base); draw(view.sc, lastCam, 1, 0, view.focus); }
+      if (!anim && view) { lastCam = restCam(now, view.base, view.sc); draw(view.sc, lastCam, 1, 0, view.focus); }
       frameHook?.();
     }
     requestAnimationFrame(frame);
