@@ -15,6 +15,15 @@
   let motion = !media.matches;
   const scrollPositions = new Map();
   const loaded = new Map();
+  // 2.5D background (depth.js). The flat #scenery image stays underneath as the fallback
+  // for no WebGL2, reduced motion, a lost GPU context or a failed load.
+  let depth = motion && window.DepthWorld ? window.DepthWorld.create() : null, depthShown = false, mapSpots = [];
+  const depthActive = () => !!depth && motion && !depth.lost;
+  function dropDepth() { depth = null; document.body.classList.remove('depth-on'); document.body.classList.remove('travelling'); }
+  if (depth) { scenery.after(depth.el); depth.onLost = dropDepth; }
+  // Mirrors the mobile background-position rules in world.css.
+  // Phones anchor to the top and skip the arrival step-in, so the scholar keeps his head.
+  const viewFor = route => { if (innerWidth >= 761) return { focus:[.5,.5], arrive: route!=='work' && route!=='skills' }; const fx = route==='home' ? .76 : route==='side-quests' ? .25 : route==='work' ? .52 : .65; return { focus:[fx,0], arrive:false }; };
   const imageFor = route => categories.some(c=>c.id===route) ? route : route==='work' ? 'tree' : route==='about' ? 'research' : route==='skills' ? 'tree' : 'home';
   function preload(scene) {
     if (!loaded.has(scene)) {
@@ -109,7 +118,7 @@
     if (categoryFor(parts[0])) return parts[0];
     return 'home';
   }
-  function render(route, restore=false) {
+  function render(route, restore=false, keepDepth=false) {
     if(dialog.open) dialog.close();
     document.body.classList.remove('modal-open');
     current = route;
@@ -120,10 +129,14 @@
     main.innerHTML = cat ? destination(cat) : route==='work' ? map() : route==='skills' ? skillsPage() : route==='about' ? about() : home();
     scenery.style.backgroundImage = `url("assets/${imageFor(route)}.webp")`;
     scenery.style.transformOrigin = 'center'; scenery.style.transform = '';
+    if (depthActive() && !keepDepth) depth.show(imageFor(route), viewFor(route)).then(()=>{ depthShown=true; updateMotion(); }).catch(dropDepth);
+    depth?.hold(false);
     document.querySelectorAll('[data-nav]').forEach(a => { if(a.dataset.nav===(cat?'work':route)) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
     window.scrollTo({top:restore?(scrollPositions.get(route)||0):0,behavior:'instant'});
     document.querySelector('#announcement').textContent = `${cat?.title || route} page`;
     wireMap();
+    // On the Neural Tree, labels follow their landmarks as the 3D view drifts.
+    mapSpots = route==='work' ? [...document.querySelectorAll('[data-node]')].map(el=>({el,x:categoryFor(el.dataset.node).x,y:categoryFor(el.dataset.node).y})).concat([...document.querySelectorAll('[data-core]')].map(el=>({el,x:53,y:46}))) : [];
   }
   async function navigate(route, restore=false) {
     if (route===current) { ++navigationToken; navigating=false; travel.classList.remove('active'); scenery.style.transform=''; return; }
@@ -133,6 +146,26 @@
     const travelFromMap = current==='work' && category;
     navigating = true;
     document.querySelector('#travel-label').textContent = category ? category.place : route==='work'?'Returning to the Neural Tree':'A new perspective';
+    if (depthActive()) {
+      // Fly through the 3D scene; the page content swaps once the new place dominates.
+      document.body.classList.add('travelling');
+      const scene = imageFor(route), opts = viewFor(route);
+      const fromSpot = categoryFor(current) || (current==='skills' ? {x:53,y:46} : null);
+      try {
+        await Promise.all([depth.load(scene), depth.load('tree')]);
+        if (token!==navigationToken) return;
+        const run = travelFromMap ? depth.fly(scene, [category.x/100, category.y/100], { focus: opts.focus, treeFocus: viewFor('work').focus })
+          : route==='work' && fromSpot ? depth.flyBack([fromSpot.x/100, fromSpot.y/100], { treeFocus: opts.focus })
+          : depth.dissolve(scene, opts);
+        await run.swap;
+        if (token!==navigationToken) return;
+        render(route, restore, true);
+      } catch { if (token!==navigationToken) return; dropDepth(); render(route, restore); }
+      main.focus({preventScroll:true});
+      document.body.classList.remove('travelling');
+      navigating = false;
+      return;
+    }
     if (motion) {
       if(travelFromMap) {
         scenery.style.transformOrigin = `${category.x}% ${category.y}%`;
@@ -153,10 +186,11 @@
   function wireMap() {
     document.querySelectorAll('[data-node],[data-route]').forEach(el=>{
       const id = el.dataset.node || el.dataset.route;
-      el.addEventListener('pointerenter',()=>{highlightRoute(id,true);preload(id);});
-      el.addEventListener('pointerleave',()=>highlightRoute(id,false));
-      el.addEventListener('focus',()=>{highlightRoute(id,true);preload(id);});
-      el.addEventListener('blur',()=>highlightRoute(id,false));
+      // While a route is lit, the 3D view eases back to rest so the overlay lines up.
+      el.addEventListener('pointerenter',()=>{highlightRoute(id,true);preload(id);depth?.hold(true);depth?.load(id).catch(()=>{});});
+      el.addEventListener('pointerleave',()=>{highlightRoute(id,false);depth?.hold(false);});
+      el.addEventListener('focus',()=>{highlightRoute(id,true);preload(id);depth?.hold(true);depth?.load(id).catch(()=>{});});
+      el.addEventListener('blur',()=>{highlightRoute(id,false);depth?.hold(false);});
     });
   }
   const leadDetails = ['Outcome','Result','Results','Impact','Findings'];
@@ -200,9 +234,16 @@
   dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');focusReturn?.focus({preventScroll:true});});
   function updateMotion() {
     document.body.classList.toggle('motion-off',!motion);
+    document.body.classList.toggle('depth-on',depthActive() && depthShown);
+    if(depth) depth.paused = !motion;
     if(!motion){scenery.style.removeProperty('--mx');scenery.style.removeProperty('--my');}
   }
-  media.addEventListener('change',()=>{motion=!media.matches;updateMotion();});
+  media.addEventListener('change',()=>{motion=!media.matches;if(motion&&depth&&!depthShown)render(current);updateMotion();});
+  depth?.onFrame(()=>{
+    if(!mapSpots.length) return;
+    const on = innerWidth>=761 && current==='work';
+    for(const s of mapSpots){ if(!on){ s.el.style.translate=''; continue; } const [dx,dy]=depth.offset(s.x/100,s.y/100); s.el.style.translate=`${dx.toFixed(1)}px ${dy.toFixed(1)}px`; }
+  });
   let pointerFrame = 0;
   window.addEventListener('pointermove',e=>{
     if(!motion || navigating || current==='work' || e.pointerType==='touch' || innerWidth<761 || pointerFrame)return;
@@ -213,5 +254,5 @@
   updateMotion();render(parseRoute());{ const header=document.querySelector('.site-header'); const onScroll=()=>header?.classList.toggle('scrolled',window.scrollY>8); window.addEventListener('scroll',onScroll,{passive:true}); onScroll(); }
   preload(imageFor(current));
   // The map is the next likely stop; other destinations load on hover or navigation.
-  setTimeout(()=>preload('tree'),1200);
+  setTimeout(()=>{ preload('tree'); depth?.load('tree').catch(()=>{}); },1200);
 })();

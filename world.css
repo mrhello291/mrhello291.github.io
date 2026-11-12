@@ -45,3 +45,11 @@ html{scroll-padding-bottom:110px}
 .map-heading h1,.map-heading p,.map-heading .eyebrow{text-shadow:0 2px 14px #020b17,0 1px 3px #020b17e6}.map-heading p{color:#d6e7f1}.map-heading:before{content:'';position:absolute;inset:-40px -80px -30px -40px;z-index:-1;background:radial-gradient(ellipse at 30% 50%,#030d1cc4,#030d1c66 55%,transparent 75%);pointer-events:none}
 .map-help{left:50%;width:auto;transform:translateX(-50%);white-space:nowrap;padding:6px 14px;background:#06182fd9;border:1px solid var(--line);color:#c5dce9;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 @media(max-width:760px){.category-dock .back-tree{grid-column:1/-1;border:0;border-bottom:1px solid var(--line);margin:0 0 3px;padding:8px 3px;text-align:center;border-radius:0;font-size:9px}.destination{padding-bottom:175px}.map-heading:before{inset:-20px -20px -20px -30px}}
+/* 2.5D depth world (depth.js): the WebGL canvas covers the flat #scenery fallback once ready. */
+#depth{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .6s,filter .7s,transform .8s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+body.depth-on #depth{opacity:1}
+body[data-page="skills"] #depth{filter:blur(3px);transform:scale(1.2)}
+body.travelling main{opacity:0;transition:opacity .2s;pointer-events:none}
+main{transition:opacity .35s}
+/* The 3D view is zoomed by 1/.9 so parallax never shows the edge; scale the map canvas to match. */
+@media(min-width:761px){body.depth-on .map-canvas{width:calc(max(100vw,150vh) / .9);height:calc(max(100vh,66.6667vw) / .9)}}
