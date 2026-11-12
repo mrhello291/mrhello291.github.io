@@ -61,3 +61,13 @@ body.depth-on *,body.depth-on *:before{-webkit-backdrop-filter:none!important;ba
 body.depth-on .right-now,body.depth-on .profile-grid,body.depth-on .story-panel{background-color:#06182eeb}
 body.depth-on .highlight,body.depth-on .home-skills a{background-color:#071b31e6}
 body.depth-on .site-header:before{background:linear-gradient(180deg,#071326fa,#081426f0)}
+/* Ongoing work: a collapsed dropdown above the past work. */
+.ongoing-drop{margin-bottom:26px;border:1px solid var(--line);background:#071b31e0}
+.ongoing-drop>summary{list-style:none;cursor:pointer;margin:0;padding:15px 18px;user-select:none;transition:color .2s,background .2s}
+.ongoing-drop>summary::-webkit-details-marker{display:none}
+.ongoing-drop>summary:after{content:'';flex:none;width:7px;height:7px;margin:-3px 2px 0 16px;border-right:1.5px solid var(--cyan);border-bottom:1.5px solid var(--cyan);transform:rotate(45deg);transition:transform .2s}
+.ongoing-drop[open]>summary:after{margin-top:3px;transform:rotate(-135deg)}
+.ongoing-drop>summary:hover{color:var(--gold);background:#0f2a40}
+.ongoing-drop>summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.ongoing-drop .ongoing-list{padding:0 12px 12px}
+.ongoing-drop .work-card{background:#0a2038f2}
