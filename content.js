@@ -198,16 +198,6 @@ PORTFOLIO.entries = [
       'Result':'16th place, with an F1 of 0.93 on the private leaderboard and 0.91 on public.'
     }, links:[{ label:'Code', url:'https://github.com/AL-ETERNITY/AI-Knight' }] },
   /* ── Research ─────────────────────────────────────────── */
-  { id:'log-analysis-ml', category:'research', status:'ongoing',
-    title:'Learning which log lines matter',
-    summary:'Can a model find bugs, errors and their causes in huge logs better than keyword windows around ERROR and WARN?',
-    tags:['Log analysis','Early stage'], date:'2026 – present',
-    skillIds:['deep-learning','llm-eval'], toolIds:['python'],
-    details:{
-      'Research question':'Current extraction of failures and causes from logs is too simple. Can a learned model rank the lines that matter for root-cause analysis?',
-      'Where it came from':'Working on root-cause analysis made it clear how much of the job is finding the few log lines that matter. Simple heuristics get you part of the way; I want a model to decide what is important.',
-      'Status':'Scoping the problem and the datasets.'
-    }, links:[] },
   { id:'synthetic-financial-db', category:'research', status:'ongoing',
     title:'Scenario-based synthetic financial databases',
     summary:'Generating realistic synthetic financial databases driven by configurable scenarios.',
