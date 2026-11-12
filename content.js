@@ -32,16 +32,16 @@ window.PORTFOLIO = {
         logos: [{ src: 'assets/logos/interiit14.png', alt: 'Inter IIT Tech Meet 14.0' }, { src: 'assets/logos/observeai.svg', alt: 'Observe.AI' }] }
     ],
     journey: [
-      { date: 'Oct 2026', title: '4th prize, Best Model · AiHack India 2026', description: 'Credit-risk modelling on AIFUL’s lending data at IIT Mandi, finishing 4th on the final private leaderboard.' },
-      { date: 'May – Jul 2026', title: 'Software Engineer Intern · Microsoft', description: 'Built a multi-agent root-cause analysis service for the Azure Storage team in Bengaluru, now part of the on-call workflow.' },
-      { date: 'Feb – Apr 2026', title: 'TabGEN research', description: 'Led a project on diffusion-based synthetic tabular data that generates better minority-class rows for imbalanced datasets.' },
-      { date: 'Dec 2025', title: '6th of 23 IITs · Inter IIT Tech Meet 14.0', description: 'Represented IIT Mandi on Observe.AI’s NLP problem statement at IIT Patna, later recognised with IIT Mandi’s Foundation Day award for technical activities.' },
-      { date: 'Sep – Nov 2025', title: 'Data Analytics Intern · Drezily', description: 'Unified three data silos into one analytics platform for a Bay Area startup, while researching hallucination reduction in LLMs.' },
-      { date: 'Mar 2025', title: '1st prize · FrostHack 2025', description: 'Won the Fetch.ai-sponsored AI agent hackathon at IIT Mandi with FinnyRAG, an agentic assistant for personal finance.' },
-      { date: 'Nov 2024 – Mar 2025', title: 'Head of Web Development · Xpecto', description: 'Led the team that built the first website for IIT Mandi’s techfest and handled most of its back end.' },
-      { date: 'Aug 2023', title: 'B.Tech Computer Science · IIT Mandi', description: 'A line-following robot in the first year, then a budget quadruped, and deep learning courses that turned into research.' },
-      { date: '2023', title: 'Cracked JEE Main and JEE Advanced', description: 'Cleared both national engineering entrance exams, with a JEE Advanced rank under 5,000, and earned a seat at IIT Mandi.' },
-      { date: '2020', title: 'Where it began', description: 'Small Python games and a reminder script. The start of automating things instead of doing them twice.' }
+      { kind: 'competition', date: 'Oct 2026', title: 'AiHack India 2026', description: 'Credit-risk modelling on AIFUL’s lending data at IIT Mandi.' },
+      { kind: 'work', date: 'May – Jul 2026', title: 'Software Engineer Intern · Microsoft', description: 'Built a multi-agent root-cause analysis service for the Azure Storage team in Bengaluru, now part of the on-call workflow.' },
+      { kind: 'research', date: 'Feb – Apr 2026', title: 'TabGEN research', description: 'Led a project on diffusion-based synthetic tabular data that generates better minority-class rows for imbalanced datasets.' },
+      { kind: 'competition', date: 'Dec 2025', title: 'Inter IIT Tech Meet 14.0', description: 'Represented IIT Mandi on Observe.AI’s NLP problem statement at IIT Patna.' },
+      { kind: 'work', date: 'Sep – Nov 2025', title: 'Data Analytics Intern · Drezily', description: 'Unified three data silos into one analytics platform for a Bay Area startup, while researching hallucination reduction in LLMs.' },
+      { kind: 'competition', date: 'Mar 2025', title: 'FrostHack 2025', description: 'Fetch.ai-sponsored AI agent hackathon at IIT Mandi, where I built FinnyRAG, an agentic assistant for personal finance.' },
+      { kind: 'work', date: 'Nov 2024 – Mar 2025', title: 'Head of Web Development · Xpecto', description: 'Led the team that built the first website for IIT Mandi’s techfest and handled most of its back end.' },
+      { kind: 'milestone', date: 'Aug 2023', title: 'B.Tech Computer Science · IIT Mandi', description: 'A line-following robot in the first year, then a budget quadruped, and deep learning courses that turned into research.' },
+      { kind: 'milestone', date: '2023', title: 'Cracked JEE Main and JEE Advanced', description: 'Cleared both national engineering entrance exams and earned a seat at IIT Mandi.' },
+      { kind: 'milestone', date: '2020', title: 'Where it began', description: 'Small Python games and a reminder script. The start of automating things instead of doing them twice.' }
     ]
   },
   categories: [
